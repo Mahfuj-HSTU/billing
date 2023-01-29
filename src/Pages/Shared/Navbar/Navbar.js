@@ -5,6 +5,7 @@ const Navbar = () => {
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link> </li>
         <li className='font-semibold'><Link to='/billing'>Bill</Link> </li>
+        <li className='font-semibold'><h2>Paid Total: </h2> </li>
         {/* {
             user?.email ?
                 <>
