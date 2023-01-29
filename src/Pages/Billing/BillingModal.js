@@ -6,6 +6,22 @@ const BillingModal = () => {
 
     const handleSubmit = ( event ) => {
         event.preventDefault();
+        const url = ( 'http://localhost:5000/api/add-billing' )
+        fetch( url, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify( bills )
+        } )
+            .then( res => res.json() )
+            .then( data => {
+                if ( data.acknowledged ) {
+                    toast.success( 'Bills added successfully' )
+                    event.target.reset();
+                }
+                // console.log( data )
+            } )
         console.log( bills )
     }
 
@@ -33,11 +49,11 @@ const BillingModal = () => {
                             </div>
 
                             <div className="form-control">
-                                <input onChange={ handleInputBlur } type="number" name='phone' placeholder="your phone number" className="input input-bordered rounded-lg" required />
+                                <input minLength={ 9 } maxLength={ 11 } onChange={ handleInputBlur } type="text" name='phone' placeholder="your phone number" className="input input-bordered rounded-lg" required />
                             </div>
 
                             <div className="form-control">
-                                <input onChange={ handleInputBlur } type="amount" name='amount' placeholder="Payable Amount" className="input input-bordered rounded-lg" required />
+                                <input onChange={ handleInputBlur } type="number" name='amount' placeholder="Payable Amount" className="input input-bordered rounded-lg" required />
                             </div>
 
                             <div className="form-control mt-6">
