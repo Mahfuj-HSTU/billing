@@ -1,13 +1,11 @@
 import React from 'react';
 
-const BillingDetails = ( { bill } ) => {
+const BillingDetails = ( { bill, isLoading } ) => {
     const { _id, name, email, phone, amount } = bill;
 
-    // let totalAmount =
-    // console.log( bill )
     return (
         <tr className='border-2'>
-            <th className='border-2'>{ _id }</th>
+            <th className='border-2'>{ isLoading ? 'Generating id' : _id }</th>
             <td className='border-2'>{ name }</td>
             <td className='border-2'>{ email }</td>
             <td className='border-2'>{ phone }</td>

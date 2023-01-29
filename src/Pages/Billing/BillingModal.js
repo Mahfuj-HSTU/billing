@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import Loading from '../Shared/Loading/Loading';
 
-const BillingModal = () => {
+const BillingModal = ( { refetch, isLoading } ) => {
     const [ bills, setBills ] = useState( {} )
 
     const handleSubmit = ( event ) => {
@@ -17,6 +18,7 @@ const BillingModal = () => {
             .then( res => res.json() )
             .then( data => {
                 if ( data.acknowledged ) {
+                    refetch();
                     toast.success( 'Bills added successfully' )
                     event.target.reset();
                 }
@@ -31,6 +33,10 @@ const BillingModal = () => {
         const newBills = { ...bills };
         newBills[ field ] = value;
         setBills( newBills )
+    }
+
+    if ( isLoading ) {
+        <Loading></Loading>
     }
     return (
         <div>

@@ -4,12 +4,12 @@ import BillingDetails from './BillingDetails';
 import BillingModal from './BillingModal';
 
 const Billing = () => {
-    const { data: bills = [] } = useQuery( {
+    const { data: bills = [], isLoading } = useQuery( {
         queryKey: [ "bills" ],
         queryFn: () =>
             fetch( "http://localhost:5000/api/billing-list" ).then( ( res ) => res.json() ),
     } );
-    // console.log( bills );
+
 
     return (
         <div className='mt-24'>
@@ -36,7 +36,7 @@ const Billing = () => {
                     <tbody>
                         {
 
-                            bills.map( bill => <BillingDetails key={ bill._id } bill={ bill }></BillingDetails> )
+                            bills.map( bill => <BillingDetails key={ bill._id } bill={ bill } isLoading={ isLoading }></BillingDetails> )
                         }
                     </tbody>
                 </table>

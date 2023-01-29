@@ -1,11 +1,25 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BillingModal from '../../Billing/BillingModal';
 
 const Navbar = () => {
+    const { data: bills = [], refetch, isLoading } = useQuery( {
+        queryKey: [ "bills" ],
+        queryFn: () =>
+            fetch( "http://localhost:5000/api/billing-list" ).then( ( res ) => res.json() ),
+    } );
+
+    let sum = 0;
+    bills.forEach( element => {
+        const amount = parseInt( element.amount )
+        sum += amount;
+    } );
+
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link> </li>
         <li className='font-semibold'><Link to='/billing'>Bill</Link> </li>
-        <li className='font-semibold'><h2>Paid Total: </h2> </li>
+        <li className='font-semibold'><h2>Paid Total: { sum }</h2> </li>
         {/* {
             user?.email ?
                 <>
@@ -37,6 +51,7 @@ const Navbar = () => {
                     { menuItems }
                 </ul>
             </div>
+            <BillingModal refetch={ refetch } isLoading={ isLoading }></BillingModal>
         </div>
     );
 };
