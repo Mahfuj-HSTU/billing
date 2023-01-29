@@ -1,47 +1,23 @@
 import React from 'react';
 
-const BillingDetails = () => {
+const BillingDetails = ( { bill } ) => {
+    const { _id, name, email, phone, amount } = bill;
+
+    // let totalAmount =
+    // console.log( bill )
     return (
-        <div className="overflow-x-auto">
-            <table className="table table-compact w-full border-2">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Payable Amount</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className='border-2'>
-                        <th className='border-2'>20</th>
-                        <td className='border-2'>Lorelei Blackstone</td>
-                        <td className='border-2'>Data Coordiator</td>
-                        <td className='border-2'>Witting, Kutch and Greenfelder</td>
-                        <td className='border-2'>Kazakhstan</td>
-                        <td className='border-2'>6/3/2020</td>
-                    </tr>
-                    <tr className='border-2'>
-                        <th>20</th>
-                        <td>Lorelei Blackstone</td>
-                        <td>Data Coordiator</td>
-                        <td>Witting, Kutch and Greenfelder</td>
-                        <td>Kazakhstan</td>
-                        <td>6/3/2020</td>
-                    </tr>
-                    <tr className='border-2'>
-                        <th>20</th>
-                        <td>Lorelei Blackstone</td>
-                        <td>Data Coordiator</td>
-                        <td>Witting, Kutch and Greenfelder</td>
-                        <td>Kazakhstan</td>
-                        <td>6/3/2020</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <tr className='border-2'>
+            <th className='border-2'>{ _id }</th>
+            <td className='border-2'>{ name }</td>
+            <td className='border-2'>{ email }</td>
+            <td className='border-2'>{ phone }</td>
+            <td className='border-2'>{ amount }</td>
+            <td className='flex justify-around border-2'>
+                <button className="btn btn-outline btn-info rounded-lg">Edit</button>
+                <div className="divider divider-horizontal">OR</div>
+                <button className='btn btn-outline btn-error rounded-lg'>Delete</button>
+            </td>
+        </tr>
     );
 };
 
