@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import Loading from '../Shared/Loading/Loading';
 
-const BillingModal = ( { refetch, isLoading } ) => {
-    const [ bills, setBills ] = useState( {} )
+const BillingModal = ( { refetch, isLoading, bills, handleUpdate } ) => {
+    const [ billing, setBilling ] = useState( {} )
+    // const { name } = bills;
+    // console.log( bills?.name );
 
     const handleSubmit = ( event ) => {
         event.preventDefault();
@@ -13,7 +15,7 @@ const BillingModal = ( { refetch, isLoading } ) => {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify( bills )
+            body: JSON.stringify( billing )
         } )
             .then( res => res.json() )
             .then( data => {
@@ -24,7 +26,8 @@ const BillingModal = ( { refetch, isLoading } ) => {
                 }
                 // console.log( data )
             } )
-        console.log( bills )
+        // console.log( billing )
+
     }
 
     const handleInputBlur = event => {
@@ -32,7 +35,7 @@ const BillingModal = ( { refetch, isLoading } ) => {
         const field = event.target.name;
         const newBills = { ...bills };
         newBills[ field ] = value;
-        setBills( newBills )
+        setBilling( newBills )
     }
 
     if ( isLoading ) {
@@ -47,7 +50,7 @@ const BillingModal = ( { refetch, isLoading } ) => {
                         <h1 className="text-3xl text-center font-bold">Your information </h1>
                         <form onSubmit={ handleSubmit } className="card-body">
                             <div className="form-control">
-                                <input onChange={ handleInputBlur } type="text" name='name' placeholder="your name" className="input input-bordered rounded-lg" required />
+                                <input onChange={ handleInputBlur } type="text" name='name' placeholder="your name" className="input input-bordered rounded-lg" defaultValue={ bills?.name } required />
                             </div>
 
                             <div className="form-control">
